@@ -3,199 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zahlenratespiel</title>
+    <title>Zahlenraten Spiel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+        }
 
-    <!-- Google Fonts für die Schriftart -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- CSS für das Design -->
-<style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #F5F5DC; /* Helles Beige-Braun für den Hintergrund */
-        color: #3E2A47; /* Dunkelbrauner Text */
-    }
-
-    h1 {
-        text-align: center;
-        color: #8B4513; /* Sattelbraun für den Titel */
-        font-size: 36px;
-        margin-top: 30px;
-    }
-
-    #game-container {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 400px; /* Maximale Breite für große Bildschirme */
-        margin: 30px auto;
-        text-align: center;
-    }
-
-
-            /* Wichtige Anpassung */
-        input, button {
-            width: 100%;  /* Verhindert, dass die Elemente den Rand überschreiten */
-            font-size: 18px;
-            margin: 10px auto;
-            padding: 12px;
-            box-sizing: border-box; /* Verhindert das Überlaufen des Elements */
-
-    input, button {
-        padding: 12px;
-        width: 100%; /* Macht die Eingabe und Buttons auf mobilen Geräten breiter */
-        font-size: 18px;
-        margin: 10px 0;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        background-color: #8B4513; /* Sattelbraun für den Button */
-        color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #A0522D; /* Dunkles Orangebraun bei Hover */
-        transform: translateY(-3px);
-    }
-
-    #message {
-        font-size: 18px;
-        color: #8B4513;
-        font-weight: bold;
-    }
-
-    /* Highscore zurücksetzen Button */
-    .reset-button {
-        background-color: #D2691E; /* Schokoladenbraun für den Reset-Button */
-    }
-
-    .reset-button:hover {
-        background-color: #CD5C5C;
-    }
-
-    /* Wackel-Animation für den Highscore-Button */
-    @keyframes shake {
-        0% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        50% { transform: translateX(5px); }
-        75% { transform: translateX(-5px); }
-        100% { transform: translateX(0); }
-    }
-
-    .reset-button:active {
-        animation: shake 0.3s ease;
-    }
-
-    /* Mobile Design: Anpassungen für kleine Bildschirmgrößen */
-    @media only screen and (max-width: 768px) {
         h1 {
-            font-size: 28px; /* Etwas kleinere Schrift auf mobilen Geräten */
+            text-align: center;
+            font-size: 36px;
+            color: #4CAF50;
+            margin-top: 20px;
         }
 
         #game-container {
-            width: 90%; /* Breite der Spielbox auf Handys 90% */
-            padding: 15px; /* Weniger Padding auf mobilen Geräten */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            margin: 10px 0;
+            box-sizing: border-box;
         }
 
         button {
-            padding: 14px; /* Größere Buttons auf mobilen Geräten */
-            font-size: 16px; /* Größere Schriftgröße auf mobilen Geräten */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #timer {
+            font-size: 20px;
+            color: #ff5722;
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         #message {
-            font-size: 16px; /* Kleinere Schrift für Nachrichten */
-        }
-    }
-
-    /* Für sehr kleine Bildschirme (Smartphones in Hochformat) */
-    @media only screen and (max-width: 480px) {
-        h1 {
-            font-size: 24px; /* Noch kleinere Schrift für ganz kleine Bildschirme */
+            font-size: 18px;
+            color: #ff5722;
+            margin-top: 20px;
         }
 
-        #game-container {
-            width: 95%; /* Fast die gesamte Bildschirmbreite */
-            padding: 10px; /* Noch weniger Padding */
+        #highscore {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 20px;
         }
-
-        input, button {
-            padding: 16px; /* Größere Eingabe und Buttons */
-            font-size: 18px; /* Größere Schrift */
-        }
-    }
-
-input, button {
-    width: 100%;  /* Sicherstellen, dass die Elemente immer die gesamte Breite des Containers ausnutzen */
-    font-size: 18px;
-    margin: 10px auto;
-    padding: 12px;
-    box-sizing: border-box; /* Verhindert das Überlaufen des Elements */
-}
-
-@media only screen and (max-width: 768px) {
-    h1 {
-        font-size: 28px; /* Schriftgröße für große Tablets anpassen */
-    }
-
-    #game-container {
-        width: 90%; /* Container etwas schmaler auf mobilen Geräten */
-        padding: 15px;
-    }
-
-    button {
-        padding: 14px;
-        font-size: 16px;
-    }
-
-    #message {
-        font-size: 16px;
-    }
-}
-
-/* Für sehr kleine Bildschirme (Smartphones in Hochformat) */
-@media only screen and (max-width: 480px) {
-    h1 {
-        font-size: 24px; /* Noch kleinere Schriftgröße für kleine Bildschirme */
-    }
-
-    #game-container {
-        width: 95%;
-        padding: 10px; /* Weniger Padding auf kleineren Bildschirmen */
-    }
-
-    input, button {
-        padding: 16px;
-        font-size: 18px;
-    }
-}
-            
-</style>
-  
-    
+    </style>
 </head>
-
 <body>
-    <h1>Zahlenratespiel</h1>
 
-    <div id="game-container">
-        <p>Rate die Zahl zwischen 1 und 100:</p>
-        <input type="number" id="guess" min="1" max="100">
-        <button onclick="checkGuess()">Raten</button>
-        <button onclick="startNewGame()">Neues Spiel</button> <!-- Der "Neues Spiel"-Button -->
-        <button onclick="resetHighscore()" class="reset-button">Highscore zurücksetzen</button> <!-- Der Button für den Highscore -->
-        <p id="message"></p>
-        <p id="timer">Zeit: 30s</p>
-    </div>
+<h1>Zahlenraten</h1>
 
-    <!-- Dein JavaScript-Code hier -->
-    <script src="script.js"></script>
+<div id="game-container">
+    <input type="number" id="guess" placeholder="Gib deine Zahl ein..." />
+    <button id="submit">Raten</button>
+    <div id="timer">Zeit: 30s</div>
+    <div id="message"></div>
+    <div id="highscore">Bester Versuch: -</div>
+    <button id="new-game">Neues Spiel</button>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
