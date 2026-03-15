@@ -12,7 +12,8 @@ function startNewGame() {
     document.getElementById('timer').textContent = "Zeit: 30s"; // Timer zurücksetzen
     document.getElementById('message').textContent = ""; // Nachricht zurücksetzen
     document.getElementById('guess').value = ""; // Eingabefeld zurücksetzen
-    startTimer(); // Timer starten
+    document.getElementById('submit').disabled = false; // Button aktivieren
+    document.getElementById('new-game').disabled = true; // 'Neues Spiel' deaktivieren
 }
 
 // Funktion für den Timer
@@ -24,6 +25,7 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timer); // Timer stoppen
             document.getElementById('message').textContent = "Zeit abgelaufen! Du hast verloren!";
+            document.getElementById('submit').disabled = true; // Button deaktivieren
             if (attempts < highscore) {
                 highscore = attempts;
                 localStorage.setItem('highscore', highscore); // Highscore speichern
@@ -36,22 +38,35 @@ function startTimer() {
 // Funktion, um die Eingabe zu überprüfen
 function checkGuess() {
     let guess = parseInt(document.getElementById('guess').value); // Eingabewert
+
+    if (isNaN(guess)) {
+        document.getElementById('message').textContent = "Bitte gib eine gültige Zahl ein!";
+        return;
+    }
+
     if (guess === randomNumber) {
         clearInterval(timer); // Timer stoppen
         document.getElementById('message').textContent = "Richtig geraten!";
+        document.getElementById('submit').disabled = true; // Button deaktivieren
         if (attempts < highscore) {
             highscore = attempts;
             localStorage.setItem('highscore', highscore); // Highscore speichern
         }
         document.getElementById('highscore').textContent = "Bester Versuch: " + highscore;
     } else {
-        document.getElementById('message').textContent = "Falsch, versuche es nochmal!";
+        document.getElementById('message').textContent = guess < randomNumber ? "Zu klein, versuche eine größere Zahl!" : "Zu groß, versuche eine kleinere Zahl!";
         attempts++; // Versuche erhöhen
     }
 }
 
 // Event-Listener für den Raten-Button
-document.getElementById('submit').addEventListener('click', checkGuess);
+document.getElementById('submit').addEventListener('click', function() {
+    // Timer starten, wenn der Button zum ersten Mal gedrückt wird
+    if (timeLeft === 30) {
+        startTimer();
+    }
+    checkGuess();
+});
 
 // Event-Listener für den Neuen Spiel-Button
 document.getElementById('new-game').addEventListener('click', startNewGame);
