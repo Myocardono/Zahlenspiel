@@ -34,11 +34,8 @@ function checkGuess() {
         }
 
         document.getElementById('message').textContent = message;
+        return;  // Keine automatische Neustart-Funktion hier mehr!
 
-        // **Entfernt**: Das automatische Starten eines neuen Spiels nach 2 Sekunden.
-        // Der Benutzer kann jetzt selbst ein neues Spiel starten, indem er den Button klickt.
-
-        return;
     } else if (guess < secretNumber) {
         message = 'Zu niedrig! Versuch es nochmal.';
     } else {
