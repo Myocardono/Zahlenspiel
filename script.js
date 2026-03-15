@@ -58,3 +58,12 @@ function startNewGame() {
     // Eingabefeld zurücksetzen
     document.getElementById('guess').value = '';
 }
+
+// Funktion für den "Highscore zurücksetzen"-Button
+function resetHighscore() {
+    // Highscore im localStorage zurücksetzen
+    localStorage.removeItem('highscore');
+
+    // Nachricht an den Benutzer
+    document.getElementById('message').textContent = 'Highscore wurde zurückgesetzt. Viel Glück beim nächsten Mal!';
+}
