@@ -1,44 +1,22 @@
-// Zahlenratespiel mit Highscore
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Zahlenratespiel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        input { width: 50px; }
+        button { margin-left: 10px; }
+        #message { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Zahlenratespiel</h1>
+    <p>Rate die Zahl zwischen 1 und 100:</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="checkGuess()">Raten</button>
+    <p id="message"></p>
 
-let secretNumber = Math.floor(Math.random() * 100) + 1;
-let attempts = 0;
-
-// Highscore aus localStorage holen oder initialisieren
-let highscore = localStorage.getItem('highscore');
-if (highscore !== null) {
-    highscore = Number(highscore);
-} else {
-    highscore = Infinity;
-}
-
-function checkGuess() {
-    const guessInput = document.getElementById('guess');
-    const guess = Number(guessInput.value);
-    attempts++;
-
-    let message = '';
-    if (guess === secretNumber) {
-        message = `Richtig! Du hast die Zahl in ${attempts} Versuchen erraten.`;
-
-        if (attempts < highscore) {
-            highscore = attempts;
-            localStorage.setItem('highscore', highscore);
-            message += " 🎉 Neuer Highscore!";
-        } else if (highscore < Infinity) {
-            message += ` Highscore: ${highscore} Versuche.`;
-        }
-
-        document.getElementById('message').textContent = message;
-        return; // Spiel beendet
-    } else if (guess < secretNumber) {
-        message = 'Zu niedrig! Versuch es nochmal.';
-    } else {
-        message = 'Zu hoch! Versuch es nochmal.';
-    }
-
-    document.getElementById('message').textContent = message;
-    guessInput.value = '';
-
-    if (highscore < Infinity) {
-    document.getElementById('message').textContent = `Bisheriger Highscore: ${highscore} Versuche.`;
-}
+    <script src="script.js" defer></script>
+</body>
+</html>
