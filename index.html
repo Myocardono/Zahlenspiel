@@ -131,6 +131,52 @@
             font-size: 18px; /* Größere Schrift */
         }
     }
+
+input, button {
+    width: 100%;  /* Sicherstellen, dass die Elemente immer die gesamte Breite des Containers ausnutzen */
+    font-size: 18px;
+    margin: 10px auto;
+    padding: 12px;
+    box-sizing: border-box; /* Verhindert das Überlaufen des Elements */
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 28px; /* Schriftgröße für große Tablets anpassen */
+    }
+
+    #game-container {
+        width: 90%; /* Container etwas schmaler auf mobilen Geräten */
+        padding: 15px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    #message {
+        font-size: 16px;
+    }
+}
+
+/* Für sehr kleine Bildschirme (Smartphones in Hochformat) */
+@media only screen and (max-width: 480px) {
+    h1 {
+        font-size: 24px; /* Noch kleinere Schriftgröße für kleine Bildschirme */
+    }
+
+    #game-container {
+        width: 95%;
+        padding: 10px; /* Weniger Padding auf kleineren Bildschirmen */
+    }
+
+    input, button {
+        padding: 16px;
+        font-size: 18px;
+    }
+}
+            
 </style>
   
     
